@@ -13,3 +13,20 @@ Test with different:
 2. app server
 3. database
 4. cache strategy
+
+Architecture
+============
+
+box 1: (Strong server)
+Web server
+App server
+Mongo master
+
+box 2: (Large memory server)
+App server
+Mongo slave
+Redis or Memcached server
+
+box 3:
+App server
+Mongo slave
