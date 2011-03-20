@@ -1,0 +1,23 @@
+<h1>Listing app_logs</h1>
+
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Params</th>
+    <th>Runtime</th>
+    <th>Created at</th>
+    <th></th>
+  </tr>
+
+<% @app_logs.each do |app_log| %>
+  <tr>
+    <td><%= app_log.status %></td>
+    <td><%= app_log.params.inspect %></td>
+    <td><%= app_log.view_runtime %></td>
+    <td><%= app_log.created_at %></td>
+    <td><%= link_to 'Show', app_log %></td>
+  </tr>
+<% end %>
+</table>
+
+<p><%= paginate @app_logs %></p>

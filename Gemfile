@@ -10,6 +10,7 @@ gem "bson_ext", "~> 1.2"
 
 # Use unicorn as the web server
 gem 'unicorn'
+gem 'kaminari'
 
 # Deploy with Capistrano
 gem 'capistrano'

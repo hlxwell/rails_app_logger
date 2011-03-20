@@ -48,6 +48,8 @@ GEM
       abstract (>= 1.0.0)
     highline (1.6.1)
     i18n (0.5.0)
+    kaminari (0.10.4)
+      rails (>= 3.0.0)
     kgio (2.3.3)
     linecache (0.43)
     mail (2.2.15)
@@ -110,6 +112,7 @@ PLATFORMS
 DEPENDENCIES
   bson_ext (~> 1.2)
   capistrano
+  kaminari
   mongoid (= 2.0.0.rc.6)
   rails (= 3.0.5)
   ruby-debug

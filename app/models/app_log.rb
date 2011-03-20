@@ -1,35 +1,25 @@
-# {
-#   'action'           : action_name,
-#   'application_name' : application_name (rails root),
-#   'controller'       : controller_name,
-#   'ip'               : ip_address,
-#   'messages'         : {
-#                          'info'  : [ ],
-#                          'debug' : [ ],
-#                          'error' : [ ],
-#                          'warn'  : [ ],
-#                          'fatal' : [ ]
-#                        },
-#   'params'           : { },
-#   'path'             : path,
-#   'request_time'     : date_of_request,
-#   'runtime'          : elapsed_execution_time_in_milliseconds,
-#   'url'              : full_url
-# }
+# {:status=>200,
+#  :path=>"/",
+#  :view_runtime=>11.1467838287354,
+#  :params=>{"action"=>"index", "controller"=>"logs"},
+#  :controller=>"LogsController",
+#  :action=>"index",
+#  :method=>"GET",
+#  :formats=>[nil]}
 
-class Log
+class AppLog
   include Mongoid::Document
-  
-  field :action
-  field :controller
-  field :application_name
-  field :ip
-  field :messages
-  field :params
+  include Mongoid::Timestamps
+
+  field :status
   field :path
-  field :request_time
-  field :runtime
-  field :url
+  field :view_runtime
+  field :params
+  field :controller
+  field :action
+  field :formats
   
-  embeds_one :messages
+  def repeating_requests
+    self.class.where(:params => self.params).order_by(:created_at.desc)
+  end
 end

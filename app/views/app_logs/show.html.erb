@@ -1,0 +1,14 @@
+<h2>Request Detail</h2>
+<p><%= @app_log.inspect %></p>
+
+<h3>Repeating Requests</h3>
+<ul>
+  <% @repeating_requests.each do |log| %>
+  <li><%= log.inspect %></li>
+  <% end %>
+</ul>
+
+<p><%= paginate @repeating_requests %></p>
+
+<%= link_to :back, app_logs_path %>
+
