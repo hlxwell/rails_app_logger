@@ -6,13 +6,13 @@ I will use anemone to traverse whole website, and the data tree will created dur
 so like a dead loop never stop input data into database.
 
 
-Missiong
-========
-Test with different:
-1. web server
-2. app server
-3. database
+Mission
+=======
+1. web server (nginx, apache)
+2. app server (unicorn, passenger)
+3. mongodb, mysql, postgreSql
 4. cache strategy
+5. when deploying show maintaining page
 
 Architecture
 ============

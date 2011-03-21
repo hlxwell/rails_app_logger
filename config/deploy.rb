@@ -4,9 +4,9 @@ set :scm, :git
 set :keep_releases, 5
 set :use_sudo, false
 
-role :web, "115.238.44.110"
-role :app, "115.238.44.110", "211.138.113.39", "211.138.113.63"
-role :db, "115.238.44.110", :primary => true
+role :web, "211.138.113.39"
+role :app, "211.138.113.39", "211.138.113.63", "115.238.44.110"
+role :db, "211.138.113.39", :primary => true
 
 set :user, "large_scale"
 set :deploy_to, "/home/large_scale/app"
@@ -19,7 +19,7 @@ set :db_file, "mongoid.yml"
 
 namespace :deploy do
   task :init_project do
-    run "cd #{release_path}; /home/large_scale/.rvm/gems/ree-1.8.7-2011.03/bin/bundle install"
+    # run "cd #{release_path}; /home/large_scale/.rvm/gems/ree-1.8.7-2011.03/bin/bundle install"
   end
 
   task :start do ; end
