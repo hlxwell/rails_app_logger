@@ -10,6 +10,7 @@
 class AppLog
   include Mongoid::Document
   include Mongoid::Timestamps
+  enslave
 
   field :status
   field :path
@@ -18,7 +19,7 @@ class AppLog
   field :controller
   field :action
   field :formats
-  
+
   def repeating_requests
     self.class.where(:params => self.params).order_by(:created_at.desc)
   end

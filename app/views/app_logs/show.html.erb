@@ -4,7 +4,10 @@
 <h3>Repeating Requests</h3>
 <ul>
   <% @repeating_requests.each do |log| %>
-  <li><%= log.inspect %></li>
+  <li>
+    <%= log.inspect %>
+    <%= link_to "show", log %>
+  </li>
   <% end %>
 </ul>
 

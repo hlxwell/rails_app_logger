@@ -1,8 +1,10 @@
 require 'rubygems'
 require 'anemone'
 
-  Anemone.crawl("http://lvh.me:8080") do |anemone|
+100.times do
+  Anemone.crawl("http://titan.tui8.com") do |anemone|
     anemone.on_every_page { |page|
       puts page.url
     }
   end
+end
