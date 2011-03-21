@@ -26,19 +26,19 @@ namespace :deploy do
   # unicorn scripts cribbed from https://github.com/daemon/capistrano-recipes/blob/master/lib/recipes/unicorn.rb
   desc "Restart unicorn"
   task :restart, :roles => :app do
-    run "kill -USR2 `cat /home/app/app/shared/pids/unicorn.pid`" do |ch, stream, out|
+    run "kill -USR2 `cat #{deploy_to}/shared/pids/unicorn.pid`" do |ch, stream, out|
       # is this block necessary?
     end
   end
 
   task :stop, :roles => :app do
-    run "kill -QUIT `cat /home/app/app/shared/pids/unicorn.pid`" do |ch, stream, out|
+    run "kill -QUIT `cat #{deploy_to}/shared/pids/unicorn.pid`" do |ch, stream, out|
       # is this block necessary?
     end
   end
 
   task :start, :roles => :app do
-    run "unicorn -E #{rails_env} -D -c #{current_path}/config/system/unicorn.conf.rb" do |ch, stream, out|
+    run "unicorn -E #{rails_env} -D -c #{current_path}/config/system/unicorn/production.rb" do |ch, stream, out|
       # is this block necessary?
     end
   end
