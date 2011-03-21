@@ -7,12 +7,8 @@ defaults: &defaults
   #     port: 27019
 
 development:
-  # <<: *defaults
-  # database: rails_app_logger_development
-  host: 211.138.113.39
-  username: hlxwell
-  password: 135531
-  database: rails_app_logger_production
+  <<: *defaults
+  database: rails_app_logger_development
 
 test:
   <<: *defaults

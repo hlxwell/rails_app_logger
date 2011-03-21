@@ -20,6 +20,7 @@ set :db_file, "mongoid.yml"
 namespace :deploy do
   task :init_project do
     # run "cd #{release_path}; /home/large_scale/.rvm/gems/ree-1.8.7-2011.03/bin/bundle install"
+    run "cd #{release_path}; cp #{shared_path}/mongoid.yml #{release_path}/config/mongoid.yml"
   end
 
   task :start do ; end
