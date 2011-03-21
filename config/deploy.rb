@@ -23,11 +23,70 @@ namespace :deploy do
     run "cd #{release_path}; cp #{shared_path}/mongoid.yml #{release_path}/config/mongoid.yml"
   end
 
-  task :start do ; end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  # unicorn scripts cribbed from https://github.com/daemon/capistrano-recipes/blob/master/lib/recipes/unicorn.rb
+  desc "Restart unicorn"
+  task :restart, :roles => :app do
+    run "kill -USR2 `cat /home/app/app/shared/pids/unicorn.pid`" do |ch, stream, out|
+      # is this block necessary?
+    end
+  end
+
+  task :stop, :roles => :app do
+    run "kill -QUIT `cat /home/app/app/shared/pids/unicorn.pid`" do |ch, stream, out|
+      # is this block necessary?
+    end
+  end
+
+  task :start, :roles => :app do
+    run "unicorn -E #{rails_env} -D -c #{current_path}/config/system/unicorn.conf.rb" do |ch, stream, out|
+      # is this block necessary?
+    end
+  end
+
+  namespace :unicorn do
+    [["TTIN", :add_worker, "Increase the Unicorn worker count by one"],
+     ["TTOU", :remove_worker, "Decrease the Unicorn worker count by one"],
+    ].each do |signal, task_name, description|
+      desc description
+      task task_name, :roles => :app do
+        run "kill -#{signal} `cat /home/app/app/shared/pids/unicorn.pid`"
+      end
+    end
   end
 end
 
+namespace :nginx do
+  desc "Reload nginx config files without restarting"
+  task :reload, :roles => :web do
+    sudo "/etc/init.d/nginx reload"
+  end
+
+  desc "Start"
+  task :start, :roles => :web do
+    sudo "/etc/init.d/nginx start"
+  end
+
+  desc "Kill nginx"
+  task :stop, :roles => :web do
+    # sudo "/etc/init.d/nginx stop"
+    sudo "pkill -9 nginx"
+  end
+
+  desc "Restart nginx"
+  task :restart, :roles => :web do
+    nginx.stop
+    nginx.start
+  end
+end
+
+desc "Double-check that local revision is same as remote"
+task "check_revisions" do
+  remote = real_revision
+  local = `git log #{branch} --format="format:%H" -n 1`.strip
+
+  exit unless remote == local or
+    Capistrano::CLI.ui.agree "local #{branch} is at #{local}...\nbut remote #{branch} is at #{remote}.\nAre you sure you want to deploy #{remote}? "
+end
+
+before "deploy", "check_revisions"
 before "deploy:symlink", "deploy:init_project"
