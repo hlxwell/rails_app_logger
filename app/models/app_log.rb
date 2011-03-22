@@ -20,6 +20,9 @@ class AppLog
   field :action
   field :formats
 
+  index :created_at
+  index :params
+
   def repeating_requests
     self.class.where(:params => self.params).order_by(:created_at.desc)
   end
