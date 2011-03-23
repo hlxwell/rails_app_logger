@@ -1,4 +1,5 @@
-worker_processes 4
+# unicorn -E production -c config/system/unicorn/development.rb
+worker_processes 8
 app_dir = "/Users/michael/projects/myProject/rails_app_logger"
 working_directory app_dir
 
@@ -13,7 +14,7 @@ timeout 30
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
 # listen "#{app_dir}/tmp/sockets/unicorn.sock", :backlog => 64
-listen 8080, :tcp_nopush => true
+listen 3000, :tcp_nopush => true
 
 pid_file = "#{app_dir}/tmp/pids/unicorn.pid"
 pid pid_file

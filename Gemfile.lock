@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/mongoid/mongoid.git
+  revision: c4b735e2e182f2728bee08e5610290ba06e59863
+  specs:
+    mongoid (2.0.0.rc.7)
+      activemodel (~> 3.0)
+      mongo (~> 1.2)
+      tzinfo (~> 0.3.22)
+      will_paginate (~> 3.0.pre)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -60,11 +70,6 @@ GEM
     mime-types (1.16)
     mongo (1.2.4)
       bson (>= 1.2.4)
-    mongoid (2.0.0.rc.6)
-      activemodel (~> 3.0)
-      mongo (~> 1.2)
-      tzinfo (~> 0.3.22)
-      will_paginate (~> 3.0.pre)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -113,7 +118,7 @@ DEPENDENCIES
   bson_ext (~> 1.2)
   capistrano
   kaminari
-  mongoid (= 2.0.0.rc.6)
+  mongoid!
   rails (= 3.0.5)
   ruby-debug
   unicorn

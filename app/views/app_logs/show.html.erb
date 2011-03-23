@@ -1,11 +1,11 @@
 <h2>Request Detail</h2>
-<p><%= @app_log.inspect %></p>
+<p><%= @app_log.params.inspect %></p>
 
 <h3>Repeating Requests</h3>
 <ul>
   <% @repeating_requests.each do |log| %>
   <li>
-    <%= log.inspect %>
+    <%= log.params.inspect %>
     <%= link_to "show", log %>
   </li>
   <% end %>

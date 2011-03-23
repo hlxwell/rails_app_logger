@@ -10,6 +10,7 @@
 class AppLog
   include Mongoid::Document
   include Mongoid::Timestamps
+
   enslave
 
   field :status
