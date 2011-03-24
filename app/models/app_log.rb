@@ -24,6 +24,8 @@ class AppLog
   index :created_at
   index :params
 
+  shard_key :view_runtime
+
   def repeating_requests
     self.class.where(:params => self.params).order_by(:created_at.desc)
   end
