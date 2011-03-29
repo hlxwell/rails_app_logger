@@ -12,6 +12,7 @@ class AppLog
   include Mongoid::Timestamps
 
   enslave
+  cache
 
   field :status
   field :path
@@ -23,8 +24,9 @@ class AppLog
 
   index :created_at
   index :params
+  index :_id
 
-  shard_key :view_runtime
+  shard_key :_id
 
   def repeating_requests
     self.class.where(:params => self.params).order_by(:created_at.desc)

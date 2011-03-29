@@ -42,5 +42,18 @@ module RailsAppLogger
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # db = Mongo::DB.new("rails_app_logger_cache", Mongo::Connection.new)
+    # config.cache_store = :mongo_store, "cache" #, :db => db
+
+    # config.cache_store = :redis_store, {
+    #   :host => '127.0.0.1',
+    #   :port => 6379,
+    #   :db => 13
+    #   # :namespace => "rails_app_logger",
+    #   # :password => "123321"
+    # }
+    
+    # config.cache_store = :mem_cache_store, "127.0.0.1"
   end
 end

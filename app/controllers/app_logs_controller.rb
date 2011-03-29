@@ -16,7 +16,7 @@ class AppLogsController < ApplicationController
   # GET /app_logs/1.xml
   def show
     @repeating_requests = @app_log.repeating_requests.page(params[:page]).per(20)
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @app_log }
